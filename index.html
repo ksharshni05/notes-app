@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Notes App</title>
+</head>
+<body>
+  <h2>My Notes</h2>
+  <textarea id="note" placeholder="Write something..."></textarea>
+  <button onclick="saveNote()">Save</button>
+  <ul id="notesList"></ul>
+
+  <script>
+    function saveNote() {
+      let note = document.getElementById("note").value;
+      if(note.trim() === "") return;
+      let li = document.createElement("li");
+      li.textContent = note;
+      document.getElementById("notesList").appendChild(li);
+      localStorage.setItem("notes", document.getElementById("notesList").innerHTML);
+      document.getElementById("note").value = "";
+    }
+    window.onload = () => {
+      document.getElementById("notesList").innerHTML = localStorage.getItem("notes") || "";
+    };
+  </script>
+</body>
+</html>
